@@ -6,7 +6,7 @@ module.exports = {
     async getAll(req, res) {
         const devs = await Dev.find();
 
-        return res.status(200).json(devs);
+        return res.status(200).json({ object: devs });
     },
 
     async getOne(req, res) {
@@ -14,7 +14,7 @@ module.exports = {
 
         if(!dev) return res.status(404).json({ message: 'Dev não existente' });
 
-        return res.status(200).json(dev);
+        return res.status(200).json({ object: dev });
     },
 
     async store(req, res) {
@@ -44,7 +44,7 @@ module.exports = {
             location
         });
 
-        return res.status(200).json({ message: 'Dev cadastrado com sucesso' });
+        return res.status(200).json({ message: 'Dev cadastrado com sucesso', object: dev});
     },
 
     async update(req, res) {
@@ -56,7 +56,7 @@ module.exports = {
 
         await Object.assign(dev, req.body).save();
 
-        return res.status(200).json({ message: 'Dev atualizado com sucesso' });
+        return res.status(200).json({ message: 'Dev atualizado com sucesso', object: dev});
     },
 
     async destroy(req, res) {
@@ -64,6 +64,6 @@ module.exports = {
 
         if(!dev) return res.status(404).json({ message: 'Dev não existente' });
 
-        return res.status(200).json({ message: 'Dev deletado com sucesso'});
+        return res.status(200).json({ message: 'Dev deletado com sucesso', object: dev});
     }
 };
